@@ -25,12 +25,20 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.takeIf { it.containsKey(TAB) }?.apply {
-            binding.textView.text = getInt(TAB).toString()
+            binding.textView.text = getString(TAB)
         }
     }
 
     companion object {
         const val TAB = "tab"
+
+        fun newInstance(
+            title: String
+        ) = HomeFragment().apply {
+            arguments = Bundle().apply {
+                putString(TAB, title)
+            }
+        }
 
     }
 }

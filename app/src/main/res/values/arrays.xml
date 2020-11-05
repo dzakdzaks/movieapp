@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="dashboardMenuTitle">
+        <item>@string/explore</item>
+        <item>@string/home</item>
+        <item>@string/account</item>
+    </string-array>
+
+    <string-array name="dashboardMenuIcon">
+        <item>@drawable/ic_explore</item>
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_person</item>
+    </string-array>
+
+</resources>
