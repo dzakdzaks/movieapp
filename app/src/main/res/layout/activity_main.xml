@@ -5,30 +5,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
+    android:background="@color/black"
     android:orientation="vertical">
 
-
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs"
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="12dp"
         android:background="@android:color/transparent"
         app:tabBackground="@drawable/bg_rounded_tabs_nonactive"
+        app:tabIconTint="@color/white"
         app:tabIndicator="@drawable/bg_rounded_tabs_active"
-        app:tabIndicatorColor="@color/light_black"
+        app:tabIndicatorColor="@color/purple_500"
         app:tabIndicatorGravity="stretch"
         app:tabIndicatorHeight="0dp"
+        app:tabInlineLabel="true"
         app:tabMode="fixed"
         app:tabRippleColor="@null"
-        app:tabInlineLabel="true"
-        app:tabSelectedTextColor="@android:color/white"
-        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget" />
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+        app:tabTextColor="@color/white">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_explore"
+            android:text="@string/explore" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_home"
+            android:text="@string/home" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_person"
+            android:text="@string/account" />
+
+
+    </com.google.android.material.tabs.TabLayout>
+
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewpager"
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_anchor="@id/tabs"
-        app:layout_anchorGravity="bottom" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

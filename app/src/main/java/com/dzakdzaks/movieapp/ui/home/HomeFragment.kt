@@ -1,10 +1,8 @@
 package com.dzakdzaks.movieapp.ui.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.dzakdzaks.movieapp.R
 import com.dzakdzaks.movieapp.databinding.FragmentHomeBinding
 import com.dzakdzaks.movieapp.ui.MainActivity
@@ -25,6 +23,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
+
+        arguments?.takeIf { it.containsKey(TAB) }?.apply {
+            binding.textView.text = getInt(TAB).toString()
+        }
+    }
+
+    companion object {
+        const val TAB = "tab"
+
     }
 }
