@@ -1,5 +1,6 @@
 package com.dzakdzaks.movieapp.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -32,21 +33,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
         makeStatusBarTransparent(false)
         setupTabs()
     }
 
     private fun setupTabs() {
-
         binding.tabLayout.setMargins(30, getStatusBarHeight() + 20, 30, 0)
 
         val titles = resources.getStringArray(R.array.dashboardMenuTitle)
-        val icons = listOf(
-            R.drawable.ic_explore,
-            R.drawable.ic_home,
-            R.drawable.ic_person,
-        )
+        val icons = resources.obtainTypedArray(R.array.dashboardMenuIcon)
 
         val adapter = TabViewPagerAdapter(this)
         adapter.addFragment(HomeFragment.newInstance(titles[0]))
@@ -56,45 +51,8 @@ class MainActivity : AppCompatActivity() {
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager, false, true) { tab, position ->
             tab.text = titles[position]
-            tab.icon = ContextCompat.getDrawable(this, icons[position])
+            tab.icon = ContextCompat.getDrawable(this, icons.getResourceId(position, 0))
         }.attach()
-    }
-
-    private fun getPopularMovies() {
-        viewModel.getPopularMovies(1).observe(this, {
-            when (it) {
-                is Success<ResponsePopularMovie> -> {
-                    lifecycleScope.launch {
-                        delay(1000L)
-                        Snackbar.make(
-                            findViewById(android.R.id.content),
-                            "Success Fetch Data.",
-                            Snackbar.LENGTH_LONG
-                        ).apply {
-                            show()
-                        }
-                    }
-                }
-                is Error -> {
-                    Snackbar.make(
-                        findViewById(android.R.id.content),
-                        it.message,
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                }
-                is Progress -> {
-                    if (it.isLoading) {
-                        Snackbar.make(
-                            findViewById(android.R.id.content),
-                            "Fetching Data...",
-                            Snackbar.LENGTH_INDEFINITE
-                        ).apply {
-                            show()
-                        }
-                    }
-
-                }
-            }
-        })
+        icons.recycle()
     }
 }
